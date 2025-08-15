@@ -5,8 +5,8 @@
     
     spl_autoload_register(function ($className) {
         $namespaces = [
-            'mnaatjes\\DataAccess\\' => __DIR__ . '/../src/',
-            'mnaatjes\\DataAccess\\Tests\\' => __DIR__ . '/'
+            'mnaatjes\\App\\' => __DIR__ . '/../src/',
+            'mnaatjes\\Tests\\' => __DIR__ . '/../tests/'
         ];
 
         foreach ($namespaces as $prefix => $baseDir) {
@@ -26,7 +26,7 @@
     /**
      * Declare namespaces to use
      */
-    use mnaatjes\DataAccess\utils\DotEnv;
+    use mnaatjes\App\Utils\DotEnv;
 
     /**
      * Create .env reader instance

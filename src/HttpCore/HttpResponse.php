@@ -1,5 +1,10 @@
 <?php
 
+    namespace mnaatjes\App\HttpCore;
+
+    /**
+     * 
+     */
     class HttpResponse
     {
         private $headers = [];

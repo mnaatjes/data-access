@@ -1,4 +1,5 @@
 <?php
+namespace mnaatjes\App\DataAccess;
 /**
  * Database Singleton Class
  *
@@ -18,9 +19,6 @@
  *  - DotEnv Class added to package to parse env variables
  *  - Added Namespace
  */
-namespace mnaatjes\DataAccess;
-use PDO;
-
 class Database {
     /**
      * The single instance of the Database class.
@@ -30,7 +28,7 @@ class Database {
 
     /**
      * The PDO database connection object.
-     * @var PDO
+     * @var \PDO
      */
     private $connection;
 
@@ -58,7 +56,7 @@ class Database {
         $dsn = "$connection:host=$host;dbname=$db;charset=$charset";
         
         try {
-            $this->connection = new PDO($dsn, $user, $pass, $options);
+            $this->connection = new \PDO($dsn, $user, $pass, $options);
         } catch (\PDOException $e) {
             // Throw a new exception with a more descriptive message.
             throw new \PDOException("Failed to connect to the database: " . $e->getMessage(), (int)$e->getCode());

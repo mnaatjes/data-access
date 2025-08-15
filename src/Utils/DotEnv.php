@@ -2,7 +2,7 @@
     /**
      * Declare Namespace
      */
-    namespace mnaatjes\DataAccess\Utils;
+    namespace mnaatjes\App\Utils;
     
     /**
      * DotEnv (.env) Class for loading Environment Variables

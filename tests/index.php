@@ -5,11 +5,11 @@
      * Connect to DB
      */
 
-use mnaatjes\DataAccess\BaseController;
-use mnaatjes\DataAccess\Database;
-    use mnaatjes\DataAccess\ORM;
-    use mnaatjes\DataAccess\utils\TestModel;
-    use mnaatjes\DataAccess\utils\TestRepository;
+    use mnaatjes\App\DataAccess\Database;
+    use mnaatjes\App\DataAccess\ORM;
+    use mnaatjes\App\MVCCore\BaseController;
+    use mnaatjes\App\Utils\TestModel;
+    use mnaatjes\App\Utils\TestRepository;
 
     $db     = Database::getInstance();
     $orm    = new ORM($db);

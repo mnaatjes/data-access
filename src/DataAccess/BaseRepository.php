@@ -1,7 +1,7 @@
 <?php
 
-    namespace mnaatjes\DataAccess;
-    use mnaatjes\DataAccess\ORM;
+    namespace mnaatjes\App\DataAccess;
+    use mnaatjes\App\DataAccess\ORM;
     /**-------------------------------------------------------------------------*/
     /**
      * Base / Parent Repository Class

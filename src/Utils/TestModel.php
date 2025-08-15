@@ -1,6 +1,6 @@
 <?php
-    namespace mnaatjes\DataAccess\utils;
-    use mnaatjes\DataAccess\BaseModel;
+    namespace mnaatjes\App\Utils;
+    use mnaatjes\App\MVCCore\BaseModel;
 
     class TestModel extends BaseModel {
 

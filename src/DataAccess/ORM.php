@@ -2,10 +2,8 @@
     /**
      * Declare Namespaces
      */
-    namespace mnaatjes\DataAccess;
-    use PDO;
-    use Exception;
-    use mnaatjes\DataAccess\Database;
+    namespace mnaatjes\App\DataAccess;
+    use mnaatjes\App\DataAccess\Database;
 
 	/**-------------------------------------------------------------------------*/
     /**
@@ -55,7 +53,7 @@
         /**
          * Database Object Instance
          */
-        protected PDO $db;
+        protected \PDO $db;
 
         /**
          * Count of number of instantiations of ORM Class

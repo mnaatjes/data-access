@@ -1,6 +1,6 @@
 <?php
-    namespace mnaatjes\DataAccess\utils;
-    use mnaatjes\DataAccess\BaseRepository;
+    namespace mnaatjes\App\Utils;
+    use mnaatjes\App\DataAccess\BaseRepository;
 
     /**-------------------------------------------------------------------------*/
     /**

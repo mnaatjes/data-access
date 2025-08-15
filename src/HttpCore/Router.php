@@ -1,4 +1,9 @@
 <?php
+    
+    namespace mnaatjes\App\HttpCore;
+    use mnaatjes\App\HttpCore\HttpRequest;
+    use mnaatjes\App\HttpCore\HttpResponse;
+    use mnaatjes\App\Container;
     /**
      * PHP Simple HTTP Manager:
      * 
@@ -170,7 +175,7 @@
                             call_user_func($route['handler'], $req, $res, $params);
                             return;
 
-                        } catch(Exception $e){
+                        } catch(\Exception $e){
                             // Set response for error condition
                             $this->sendErrorResponse($res, $e);
                         }
@@ -187,7 +192,7 @@
 
                             // Throw exception if cannot find delimiter
                             if(!is_int($pos)){
-                                throw new Exception("Unable to determine path!");
+                                throw new \Exception("Unable to determine path!");
                             }
 
                             // Split values
@@ -204,7 +209,7 @@
                             );
                             return;
 
-                        } catch(Exception $e) {
+                        } catch(\Exception $e) {
                             // Set response for error condition
                             $this->sendErrorResponse($res, $e);
                         }
@@ -241,7 +246,7 @@
          * Sends error response
          */
         /**-------------------------------------------------------------------------*/
-        private function sendErrorResponse(HttpResponse $res, string|Exception $e){
+        private function sendErrorResponse(HttpResponse $res, string|\Exception $e){
             /**
              * Form and execute response 
              */

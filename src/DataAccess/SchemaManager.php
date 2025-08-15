@@ -1,7 +1,5 @@
 <?php
-    namespace mnaatjes\SchemaManager;
-    use PDO;
-    use Exception;
+    namespace mnaatjes\App\DataAccess;
     /**-------------------------------------------------------------------------*/
     /**
      * Schema Manager
@@ -17,14 +15,14 @@
         /**
          * @var PDO $db
          */
-        private PDO $db;
+        private \PDO $db;
 
         /**-------------------------------------------------------------------------*/
         /**
          * Constructor
          */
         /**-------------------------------------------------------------------------*/
-        public function __construct(PDO $db_instance){
+        public function __construct(\PDO $db_instance){
             // Define Instance
             $this->db = $db_instance;
         }
@@ -53,9 +51,9 @@
 
                 // Execute Query and return array
                 $stmt->execute();
-                return $stmt->fetchAll(PDO::FETCH_COLUMN);
+                return $stmt->fetchAll(\PDO::FETCH_COLUMN);
 
-            } catch(Exception $e){
+            } catch(\Exception $e){
                 var_dump("Unable to list Database Tables! Error: " . $e);
             }
         }

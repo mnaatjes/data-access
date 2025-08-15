@@ -1,8 +1,6 @@
 <?php
 
-    namespace mnaatjes\DataAccess\utils;
-
-use Exception;
+    namespace mnaatjes\App\Utils;
 
     /**
      * Data Generator Static Class for aiding in development and integration of Database and ORM Classes
@@ -93,7 +91,7 @@ use Exception;
 
             // Validate
             if(!file_exists($path)){
-                throw new Exception("Unable to identify resource in " . __METHOD__);
+                throw new \Exception("Unable to identify resource in " . __METHOD__);
             }
 
             // Set Count
@@ -193,7 +191,7 @@ use Exception;
                  if(is_dir($dir) === true){
                     return $dir;
                  }
-            } catch(Exception $e){
+            } catch(\Exception $e){
                 return false;
             }
         }
@@ -208,12 +206,12 @@ use Exception;
         private static function readJSON(string $path){
             // Validate extension
             if(strpos($path, ".json") === 0){
-                throw new Exception("Resource MUST be a JSON file!");
+                throw new \Exception("Resource MUST be a JSON file!");
             }
 
             // Validate Path
             if(!file_exists($path)){
-                throw new Exception("Unable to find file in " . __METHOD__);
+                throw new \Exception("Unable to find file in " . __METHOD__);
             }
 
             // Get Contents and Decode
@@ -222,9 +220,9 @@ use Exception;
 
             // Check array conversion successful
             if($data === NULL){
-                throw new Exception("Error: Invalid JSON format");
+                throw new \Exception("Error: Invalid JSON format");
             } elseif(json_last_error() !== JSON_ERROR_NONE){
-                throw new Exception("Unable to properly decode JSON file!");
+                throw new \Exception("Unable to properly decode JSON file!");
             }
 
             // return data array

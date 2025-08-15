@@ -1,7 +1,6 @@
 <?php
 
-    namespace mnaatjes\DataAccess;
-    use ReflectionProperty;
+    namespace mnaatjes\App\MVCCore;
 
     /**-------------------------------------------------------------------------*/
     /**
