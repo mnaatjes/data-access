@@ -1,6 +1,8 @@
 <?php
 
     namespace mnaatjes\DataAccess;
+    use HttpRequest;
+    use HttpResponse;
 
     /**------------------------------------------------------------------------*/
     /**
@@ -56,7 +58,7 @@
          * @return void
          */
         /**------------------------------------------------------------------------*/
-        abstract public function index(): void;
+        abstract public function index(HttpRequest $req, HttpResponse $res): void;
 
         /**------------------------------------------------------------------------*/
         /**
@@ -66,7 +68,7 @@
          * @return void
          */
         /**------------------------------------------------------------------------*/
-        abstract public function show(int $id): void;
+        abstract public function show(HttpRequest $req, HttpResponse $res, array $params): void;
 
         /**------------------------------------------------------------------------*/
         /**
@@ -75,7 +77,7 @@
          * @return void
          */
         /**------------------------------------------------------------------------*/
-        abstract public function create(): void;
+        abstract public function create(HttpRequest $req, HttpResponse $res, array $params): void;
 
         /**------------------------------------------------------------------------*/
         /**
@@ -84,7 +86,7 @@
          * @return void
          */
         /**------------------------------------------------------------------------*/
-        abstract public function store(): void;
+        abstract public function store(HttpRequest $req, HttpResponse $res, array $params): void;
 
         /**------------------------------------------------------------------------*/
         /**
@@ -94,7 +96,7 @@
          * @return void
          */
         /**------------------------------------------------------------------------*/
-        abstract public function edit(int $id): void;
+        abstract public function edit(HttpRequest $req, HttpResponse $res, array $params): void;
 
         /**------------------------------------------------------------------------*/
         /**
@@ -104,7 +106,7 @@
          * @return void
          */
         /**------------------------------------------------------------------------*/
-        abstract public function update(int $id): void;
+        abstract public function update(HttpRequest $req, HttpResponse $res, array $params): void;
 
         /**------------------------------------------------------------------------*/
         /**
@@ -114,7 +116,7 @@
          * @return void
          */
         /**------------------------------------------------------------------------*/
-        abstract public function destroy(int $id): void;
+        abstract public function destroy(HttpRequest $req, HttpResponse $res, array $params): void;
         
         /**------------------------------------------------------------------------*/
         /**
@@ -126,10 +128,7 @@
          * @return void
          */
         /**------------------------------------------------------------------------*/
-        protected function redirect(string $uri): void {
-            header("Location: {$uri}");
-            exit;
-        }
+        protected function redirect(HttpRequest $req, HttpResponse $res, array $params): void {}
 
         /**------------------------------------------------------------------------*/
         /**
@@ -143,11 +142,6 @@
          * @return void
          */
         /**------------------------------------------------------------------------*/
-        protected function jsonResponse(array $data, int $statusCode = 200): void {
-            header('Content-Type: application/json');
-            http_response_code($statusCode);
-            echo json_encode($data);
-            exit;
-        }
+        protected function jsonResponse(HttpRequest $req, HttpResponse $res, array $data): void {}
     }
 ?>
