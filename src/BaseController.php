@@ -24,7 +24,7 @@
      * @version 1.0.0
      */
     /**------------------------------------------------------------------------*/
-    abstract class AbstractBaseController {
+    abstract class BaseController {
         /**
          * The repository instance for accessing data.
          *

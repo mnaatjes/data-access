@@ -4,7 +4,9 @@
     /**
      * Connect to DB
      */
-    use mnaatjes\DataAccess\Database;
+
+use mnaatjes\DataAccess\BaseController;
+use mnaatjes\DataAccess\Database;
     use mnaatjes\DataAccess\ORM;
     use mnaatjes\DataAccess\utils\TestModel;
     use mnaatjes\DataAccess\utils\TestRepository;
@@ -13,6 +15,11 @@
     $orm    = new ORM($db);
 
     $repo   = new TestRepository($orm);
+    $control = new class () extends BaseController{
+        public function __construct(){
+            var_dump("Hello World!");
+        }
+    }
     //$record = $repo->findById(23);
     //var_dump($record);
 
