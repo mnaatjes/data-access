@@ -2,9 +2,11 @@
 
     namespace mnaatjes\App\HttpCore;
 
+    /**-------------------------------------------------------------------------*/
     /**
      * 
      */
+    /**-------------------------------------------------------------------------*/
     class HttpResponse
     {
         private $headers = [];
@@ -12,6 +14,7 @@
         private $statusCode = 200;
         private $statusText = 'OK';
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Set the HTTP status code and optional status text.
          *
@@ -20,6 +23,7 @@
          * a default will be used based on the status code.
          * @return self
          */
+        /**-------------------------------------------------------------------------*/
         public function setStatusCode(int $statusCode, string $statusText = ''): self
         {
             $this->statusCode = $statusCode;
@@ -27,6 +31,7 @@
             return $this;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Add a custom HTTP header.
          *
@@ -36,30 +41,35 @@
          * Defaults to true.
          * @return self
          */
+        /**-------------------------------------------------------------------------*/
         public function addHeader(string $name, string $value, bool $replace = true): self
         {
             $this->headers[] = ['name' => $name, 'value' => $value, 'replace' => $replace];
             return $this;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Set the response body.
          *
          * @param string $body The content of the response body.
          * @return self
          */
+        /**-------------------------------------------------------------------------*/
         public function setBody(string $body): self
         {
             $this->body = $body;
             return $this;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Send all headers and the response body.
          * This method will prevent further output once called.
          *
          * @return void
          */
+        /**-------------------------------------------------------------------------*/
         public function send(): void
         {
             // Set the HTTP status line
@@ -77,12 +87,49 @@
             exit();
         }
 
+        /**-------------------------------------------------------------------------*/
+        /**
+         * Sends a JSON response with the provided data.
+         *
+         * This method automatically sets the Content-Type header to `application/json`,
+         * encodes the data to a JSON string, and then sends the full response.
+         *
+         * @param mixed $data The data to be encoded and sent as JSON.
+         * @param int $statusCode The HTTP status code for the response. Defaults to 200.
+         * @return void
+         */
+        /**-------------------------------------------------------------------------*/
+        public function sendJson(mixed $data, int $statusCode = 200): void
+        {
+            // Set the status code for the response
+            $this->setStatusCode($statusCode);
+
+            // Set the Content-Type header to indicate a JSON response
+            $this->addHeader('Content-Type', 'application/json');
+            
+            // Attempt to encode the data into a JSON string
+            try {
+                $jsonBody = json_encode($data, JSON_THROW_ON_ERROR);
+                $this->setBody($jsonBody);
+            } catch (\JsonException $e) {
+                // Handle JSON encoding errors, e.g., for non-serializable data.
+                // In this case, we'll send a 500 Internal Server Error.
+                $this->setStatusCode(500, 'Internal Server Error');
+                $this->setBody(json_encode(['error' => 'Failed to encode JSON response.']));
+            }
+
+            // Send the complete response
+            $this->send();
+        }
+
+        /**-------------------------------------------------------------------------*/
         /**
          * Helper method to get default HTTP status text for common status codes.
          *
          * @param int $statusCode The HTTP status code.
          * @return string The default status text.
          */
+        /**-------------------------------------------------------------------------*/
         private function getDefaultStatusText(int $statusCode): string
         {
             switch ($statusCode) {
@@ -126,5 +173,7 @@
                 default: return 'Unknown Status';
             }
         }
+        
+        /**-------------------------------------------------------------------------*/
     }
 ?>

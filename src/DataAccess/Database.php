@@ -30,7 +30,7 @@ class Database {
      * The PDO database connection object.
      * @var \PDO
      */
-    private $connection;
+    private \PDO $connection;
 
     /**
      * Private constructor to prevent direct object creation.

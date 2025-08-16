@@ -297,11 +297,31 @@
 
         /**-------------------------------------------------------------------------*/
         /**
-         * Update Model
-         * @return BaseModel
          */
         /**-------------------------------------------------------------------------*/
-        public function update(array $data){}
+        public function toJSON(): ?string{
+            /**
+             * Reflected Child Class
+             * @var \ReflectionClass $reflection
+             */
+            $reflection = new \ReflectionClass(get_called_class());
+
+            /**
+             * Return array of snake_case keyed properties
+             */
+            $data = array_reduce($reflection->getProperties(\ReflectionProperty::IS_PRIVATE), function($acc, $obj){
+                // Make property available
+                $obj->setAccessible(true);
+
+                // Return entry
+                $acc[$obj->getName()] = $obj->getValue($this);
+                return $acc;
+            }, []);
+
+            // Return JSON String
+            return json_encode($data);
+
+        }
     }
 
 ?>

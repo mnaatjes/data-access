@@ -53,7 +53,7 @@
         /**
          * Database Object Instance
          */
-        protected \PDO $db;
+        protected $db;
 
         /**
          * Count of number of instantiations of ORM Class
@@ -107,7 +107,7 @@
 		 * 
          */
         /**-------------------------------------------------------------------------*/
-        public function find(string $table_name, array $conditions=[], array $orderBy=[], $limit=0, array $columns=["*"], $fetchMethod="fetchAll", $fetchStyle=PDO::FETCH_ASSOC){
+        public function find(string $table_name, array $conditions=[], array $orderBy=[], $limit=0, array $columns=["*"], $fetchMethod="fetchAll", $fetchStyle=\PDO::FETCH_ASSOC){
             /**
              * Form SQL:
              * - Apply columns
@@ -166,7 +166,7 @@
 				 */
 				$result = call_user_func_array([$stmt, $fetchMethod], [$fetchStyle]);
 				return $result;
-			} catch (Exception $e){
+			} catch (\Exception $e){
 				// Return empty record
 				return NULL;
 			}
@@ -251,7 +251,7 @@
                 $stmt->execute();
                 return $this->db->lastInsertId();
 
-            } catch (Exception $e){
+            } catch (\Exception $e){
                 // Return false on failure to execute
                 return false;
             }
@@ -318,7 +318,7 @@
                 // Return number of affected rows
                 return $stmt->rowCount();
 
-            } catch(Exception $e){
+            } catch(\Exception $e){
                 // Return false on failure to execute
                 return false;
             }
@@ -375,7 +375,7 @@
                 // Return number of affected rows
                 return $stmt->rowCount();
 
-            } catch(Exception $e){
+            } catch(\Exception $e){
                 // Return false on failure to execute
                 return false;
             }
@@ -428,7 +428,7 @@
                 $stmt->execute($bindings);
                 return $stmt->fetchColumn();
 
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 // Handle the exception
                 return false;
             }
@@ -469,7 +469,7 @@
                 // Return Boolean
                 return $stmt->fetchColumn();
 
-            } catch(Exception $e){
+            } catch(\Exception $e){
                 // Return false
                 return false;
             }
@@ -496,7 +496,7 @@
          * - On failure: `false`.
          */
         /**-------------------------------------------------------------------------*/
-        public function query(string $sql, array $bindings=[], string $fetchMethod="fetchAll", string $fetchStyle=PDO::FETCH_ASSOC){
+        public function query(string $sql, array $bindings=[], string $fetchMethod="fetchAll", string $fetchStyle=\PDO::FETCH_ASSOC){
             /**
              * Try: prepare and execute
              * Catch: Return Error
@@ -524,7 +524,7 @@
                     return $stmt->rowCount();
                 }
 
-            } catch (Exception $e){
+            } catch (\Exception $e){
                 // log error
                 // Return false
                 return false;
@@ -558,7 +558,7 @@
          * @throws \Exception If a join clause array is malformed and cannot be processed.
          */
         /**-------------------------------------------------------------------------*/
-        public function join(string $primaryTable, array $joins=[], array $selects=["*"], array $conditions=[], $orderBy=[], $limit=0, $fetchMethod="fetchAll", $fetchStyle=PDO::FETCH_ASSOC){
+        public function join(string $primaryTable, array $joins=[], array $selects=["*"], array $conditions=[], $orderBy=[], $limit=0, $fetchMethod="fetchAll", $fetchStyle=\PDO::FETCH_ASSOC){
             /**
              * Parse Join Clauses
              */
@@ -579,7 +579,7 @@
                 } else {
                     // Format: "table" => "table_name", "KEYWORD" => "condition"
                     if(count($join) > 2 || !isset($join["table"])){
-                        throw new Exception("Unable to process INNER JOIN request!");
+                        throw new \Exception("Unable to process INNER JOIN request!");
                     }
 
                     // Find Properties
@@ -708,7 +708,7 @@
 
 			// Return Record OR Throw Exception
 			if(empty($results)){
-				throw new Exception("Could NOT find record in table: " . $table_name . "!!!");
+				throw new \Exception("Could NOT find record in table: " . $table_name . "!!!");
 			} else {
 				return $results;
 			}
@@ -773,7 +773,7 @@
 								$index_clause = array_keys($matches, $clause)[0];
 								
 								if(count(array_diff($matches, [$matches[$index_clause]])) !== 3){
-									throw new Exception("Incorrect Condition format!");
+									throw new \Exception("Incorrect Condition format!");
 								}
 								
 								// Push to accumulator array

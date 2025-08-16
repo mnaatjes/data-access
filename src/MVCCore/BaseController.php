@@ -47,9 +47,10 @@
          * @param array $requestData An array containing all incoming request data.
          */
         /**------------------------------------------------------------------------*/
-        public function __construct(){
+        public function __construct(BaseRepository $repository){
 
             // Validate BaseRepository is set
+            $this->repository = $repository;
         }
 
         /**------------------------------------------------------------------------*/

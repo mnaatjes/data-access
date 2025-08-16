@@ -2,6 +2,7 @@
 
     namespace mnaatjes\App\DataAccess;
     use mnaatjes\App\DataAccess\ORM;
+    use mnaatjes\App\MVCCore\BaseModel;
     /**-------------------------------------------------------------------------*/
     /**
      * Base / Parent Repository Class

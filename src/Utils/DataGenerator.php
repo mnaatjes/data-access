@@ -2,6 +2,7 @@
 
     namespace mnaatjes\App\Utils;
 
+    /**-------------------------------------------------------------------------*/
     /**
      * Data Generator Static Class for aiding in development and integration of Database and ORM Classes
      * 
@@ -15,6 +16,7 @@
      * 
      * @static
      */
+    /**-------------------------------------------------------------------------*/
     class DataGenerator {
 
         /**-------------------------------------------------------------------------*/
