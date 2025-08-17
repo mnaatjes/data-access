@@ -40,39 +40,42 @@ This is what ends up in `vendors/` directory when installed by composer.
 │
 ├── app/
 │   ├── Controllers/
-│   └── Middleware/
-│
-├── bootstrap/
-│   ├── app.php
-│   └── cache/
+│   │   └── TestController.php
+│   │   
+│   ├── Models/
+│   │   └── TestModel.php
+│   │   
+│   ├── Repositories/
+│   │   └── TestRepository.php
+│   │   
+│   ├── Services/
+│   └── Views/
 │
 ├── config/
 │   ├── config.env
-│   └── cache/
+│   └── services.php
 │
 ├── database/
 │   ├── Models/
 │   └── Repositories/
 │
 ├── public/
+│   ├── assets/
+│   │   ├── css/
+│   │   └── images/
+│   │   
 │   └── index.php
 │
 ├── resources/
-│   ├── css/
+│   ├── data/
 │   ├── sass/
-│   ├── js/
-│   ├── lang/
-│   └── views/
+│   └── js/
 │
 ├── routes/
 │   ├── web.php
-│   ├── api.php
-│   ├── console.php
-│   └── channels.php
+│   └── api.php
 │
 ├── storage/
-│   ├── app/
-│   ├── framework/
 │   └── logs/
 │
 ├── tests/
