@@ -36,6 +36,7 @@ This is what ends up in `vendors/` directory when installed by composer.
 ```
 
 ## 1.2 Project / Template Directory Structure
+```
 .
 │
 ├── app/
@@ -54,10 +55,6 @@ This is what ends up in `vendors/` directory when installed by composer.
 ├── config/
 │   ├── config.env
 │   └── services.php
-│
-├── database/
-│   ├── Models/
-│   └── Repositories/
 │
 ├── public/
 │   ├── assets/
@@ -84,6 +81,7 @@ This is what ends up in `vendors/` directory when installed by composer.
 |
 ├── .gitignore
 └── README.md
+```
 
 This is the directory structure of the **Template** that the client will have after `composer create-project` is executed.
 
