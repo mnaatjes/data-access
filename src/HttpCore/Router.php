@@ -52,6 +52,11 @@
          *
          * @param string $path The URL path (e.g., '/users', '/users/{id}').
          * @param string|array|callable $handler The callback function or method to execute.
+         * 
+         * @example
+         *      $router->get("/", [TestController::class, "index"]);
+         *      $router->get("/", "TestController@index()");
+         * 
          * @return self
          */
         /**-------------------------------------------------------------------------*/

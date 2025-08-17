@@ -1,7 +1,7 @@
 <?php
 
     namespace mnaatjes\mvcFramework\MVCCore;
-    use mnaatjes\mvcFramework\MVCCore\BaseRepository;
+    use mnaatjes\mvcFramework\DataAccess\BaseRepository;
     use mnaatjes\mvcFramework\HttpCore\HttpRequest;
     use mnaatjes\mvcFramework\HttpCore\HttpResponse;
 

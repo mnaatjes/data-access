@@ -11,12 +11,13 @@
     /**
      * Set error_handling
      */
-
+    
     /**
      * Instantiate DI Container and Return
-     * @var $container
+     * @var Container $container
      */
-    $container = "Test Container String";
+    use mnaatjes\mvcFramework\Container;
+    $container = new Container();
     return $container;
 
     
