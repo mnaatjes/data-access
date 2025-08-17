@@ -17,5 +17,8 @@
             "mnaatjes\\mvcFramework\\": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "^3.8"
+    }
 }

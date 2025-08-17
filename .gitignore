@@ -1,0 +1,7 @@
+# Remove Composer Dev Files
+composer.lock
+vendor/
+
+# phpdocs
+.phpdoc/
+docs/
