@@ -1,5 +1,5 @@
 <?php
-    namespace mnaatjes\App\DataAccess;
+    namespace mnaatjes\mvcFramework\DataAccess;
     /**-------------------------------------------------------------------------*/
     /**
      * Schema Manager

@@ -1,6 +1,6 @@
 <?php
     
-    namespace mnaatjes\App;
+    namespace mnaatjes\mvcFramework;
     
     /**
      * A simple Dependency Injection Container.

@@ -1,8 +1,8 @@
 <?php
 
-    namespace mnaatjes\App\DataAccess;
-    use mnaatjes\App\DataAccess\ORM;
-    use mnaatjes\App\MVCCore\BaseModel;
+    namespace mnaatjes\mvcFramework\DataAccess;
+    use mnaatjes\mvcFramework\DataAccess\ORM;
+    use mnaatjes\mvcFramework\MVCCore\BaseModel;
     /**-------------------------------------------------------------------------*/
     /**
      * Base / Parent Repository Class

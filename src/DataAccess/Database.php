@@ -1,5 +1,7 @@
 <?php
-namespace mnaatjes\App\DataAccess;
+
+namespace mnaatjes\mvcFramework\DataAccess;
+
 /**
  * Database Singleton Class
  *

@@ -1,9 +1,9 @@
 <?php
 
-    namespace mnaatjes\App\MVCCore;
-    use mnaatjes\App\DataAccess\BaseRepository;
-    use mnaatjes\App\HttpCore\HttpRequest;
-    use mnaatjes\App\HttpCore\HttpResponse;
+    namespace mnaatjes\mvcFramework\MVCCore;
+    use mnaatjes\mvcFramework\MVCCore\BaseRepository;
+    use mnaatjes\mvcFramework\HttpCore\HttpRequest;
+    use mnaatjes\mvcFramework\HttpCore\HttpResponse;
 
     /**------------------------------------------------------------------------*/
     /**

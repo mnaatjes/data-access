@@ -1,6 +1,6 @@
 <?php
 
-    namespace mnaatjes\App\MVCCore;
+    namespace mnaatjes\mvcFramework\MVCCore;
 
     /**-------------------------------------------------------------------------*/
     /**

@@ -1,9 +1,9 @@
 <?php
     
-    namespace mnaatjes\App\HttpCore;
-    use mnaatjes\App\HttpCore\HttpRequest;
-    use mnaatjes\App\HttpCore\HttpResponse;
-    use mnaatjes\App\Container;
+    namespace mnaatjes\mvcFramework\HttpCore;
+    use mnaatjes\mvcFramework\HttpCore\HttpRequest;
+    use mnaatjes\mvcFramework\HttpCore\HttpResponse;
+    use mnaatjes\mvcFramework\Container;
     /**
      * PHP Simple HTTP Manager:
      * 

@@ -2,8 +2,8 @@
     /**
      * Declare Namespaces
      */
-    namespace mnaatjes\App\DataAccess;
-    use mnaatjes\App\DataAccess\Database;
+    namespace mnaatjes\mvcFramework\DataAccess;
+    use mnaatjes\mvcFramework\DataAccess\Database;
 
 	/**-------------------------------------------------------------------------*/
     /**

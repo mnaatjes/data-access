@@ -1,6 +1,6 @@
 <?php
 
-    namespace mnaatjes\App\Utils;
+    namespace mnaatjes\mvcFramework\Utils;
 
     /**-------------------------------------------------------------------------*/
     /**

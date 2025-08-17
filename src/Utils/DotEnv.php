@@ -2,7 +2,7 @@
     /**
      * Declare Namespace
      */
-    namespace mnaatjes\App\Utils;
+    namespace mnaatjes\mvcFramework\Utils;
     
     /**
      * DotEnv (.env) Class for loading Environment Variables
