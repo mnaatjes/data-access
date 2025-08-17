@@ -1,4 +1,8 @@
+
+
 # Data-Access Package
+
+## Project Template and Framework Configuration and Installation
 
 * **Author:** Michael Naatjes
 * **Version:** 1.0.0
@@ -6,12 +10,13 @@
 
 # 1 Overview
 
-## 1.1
+## 1.1 Library / Framework Directory Structure
 
-## 1.2 Directory Structure
+This is the directory structure of the `mnaatjes/data-access/` package.
+This is what ends up in `vendors/` directory when installed by composer.
 ```
 .
-├── config/
+│
 ├── resources/
 │   ├── data/
 │   └── docs/
@@ -24,35 +29,66 @@
 │   └── Container.php
 |
 ├── tests/
+│   └── ...replicate template environment.../
+|
 ├── LICENSE
 └── README.md
 ```
 
+## 1.2 Project / Template Directory Structure
+.
+│
+├── app/
+│   ├── Controllers/
+│   └── Middleware/
+│
+├── bootstrap/
+│   ├── app.php
+│   └── cache/
+│
+├── config/
+│   ├── config.env
+│   └── cache/
+│
+├── database/
+│   ├── Models/
+│   └── Repositories/
+│
+├── public/
+│   └── index.php
+│
+├── resources/
+│   ├── css/
+│   ├── sass/
+│   ├── js/
+│   ├── lang/
+│   └── views/
+│
+├── routes/
+│   ├── web.php
+│   ├── api.php
+│   ├── console.php
+│   └── channels.php
+│
+├── storage/
+│   ├── app/
+│   ├── framework/
+│   └── logs/
+│
+├── tests/
+│   
+├── vendors/
+|
+├── .gitignore
+└── README.md
+
+This is the directory structure of the **Template** that the client will have after `composer create-project` is executed.
+
+
+--- --- --- --- --- ---
+
+
 # 2 Configuration and Setup
 
-## 2.1 Composer.json file
 
-* **Create:** `~/data-access/composer.json`
-
-```json
-{
-    "name": "mnaatjes/data-access",
-    "description": "",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Michael Naatjes",
-            "email": "michael.naatjes87@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "mnaatjes\\App\\": "src/"
-        }
-    },
-    "require": {
-        "php": "^8.1"
-    }
-}
-```
+---
