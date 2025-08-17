@@ -12,7 +12,7 @@
 
 ## 1.1 Library / Framework Directory Structure
 
-This is the directory structure of the `mnaatjes/data-access/` package.
+This is the directory structure of the `mnaatjes/mvc-framework/` package.
 This is what ends up in `vendors/` directory when installed by composer.
 ```
 .
@@ -36,6 +36,9 @@ This is what ends up in `vendors/` directory when installed by composer.
 ```
 
 ## 1.2 Project / Template Directory Structure
+
+This is the directory structure of the `mnaatjes/mvc-skeleton/` template.
+
 ```
 .
 │
@@ -75,10 +78,11 @@ This is what ends up in `vendors/` directory when installed by composer.
 ├── storage/
 │   └── logs/
 │
-├── tests/
+├── tests/ ...user generated tests
 │   
-├── vendors/
+├── vendors/ ...mvc-framework install
 |
+├── composer.json
 ├── .gitignore
 └── README.md
 ```
