@@ -95,5 +95,7 @@ This is the directory structure of the **Template** that the client will have af
 
 # 2 Configuration and Setup
 
-
+```bash
+composer create-project mnaatjes/mvc-skeleton my-new-app --repository='{"type":"vcs", "url":"https://github.com/mnaatjes/mvc-template.git"}' --stability dev
+```
 ---
