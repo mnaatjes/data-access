@@ -233,17 +233,16 @@
         /**-------------------------------------------------------------------------*/
         private function renderView(string $view, array $data): string
         {
+            // The $viewsPath property already holds the correct, absolute path.
+            // We just need to append the view file name.
             $viewPath = $this->viewsPath . DIRECTORY_SEPARATOR . $view . '.php';
 
             if (!file_exists($viewPath)) {
-                // A more robust application would handle this with a 404 error page.
                 throw new \Exception("View file not found: " . $viewPath);
             }
 
-            // Make the data variables accessible to the view file
             extract($data);
             
-            // Start output buffering to capture the view's content
             ob_start();
             include $viewPath;
             return ob_get_clean();
@@ -262,9 +261,13 @@
         /**-------------------------------------------------------------------------*/
         private function renderLayout(string $content): string
         {
+            // The $viewsPath property already holds the correct, absolute path.
+            // We just need to append the layouts path and file name.
             $layoutPath = $this->viewsPath . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . 'main.php';
 
             if (!file_exists($layoutPath)) {
+                // This is the error you were seeing.
+                // The path should now be correct if $viewsPath is correct.
                 throw new \Exception("Layout file not found: " . $layoutPath);
             }
 
