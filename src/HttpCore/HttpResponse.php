@@ -4,7 +4,9 @@
 
     /**-------------------------------------------------------------------------*/
     /**
-     * 
+     * @version 1.1.0
+     * @since 1.0.0:
+     * - Added render() methods
      */
     /**-------------------------------------------------------------------------*/
     class HttpResponse
@@ -13,6 +15,18 @@
         private $body = '';
         private $statusCode = 200;
         private $statusText = 'OK';
+        private $viewsPath;
+
+        /**-------------------------------------------------------------------------*/
+        /**
+         * Construct
+         */
+        /**-------------------------------------------------------------------------*/
+        public function __construct(string $viewsPath = __DIR__ . '/../../views')
+        {
+            // Set a default views path. Adjust as needed for your project structure.
+            $this->viewsPath = rtrim($viewsPath, '/');
+        }
 
         /**-------------------------------------------------------------------------*/
         /**
@@ -175,5 +189,88 @@
         }
         
         /**-------------------------------------------------------------------------*/
+        /**
+         * Sends a rendered HTML response using a view and a master layout.
+         *
+         * This method automatically sets the Content-Type header to `text/html`,
+         * renders the specified view file, and then injects that content into a
+         * layout file before sending the complete response.
+         *
+         * @param string $view The name of the view file to render (e.g., 'home' for home.php).
+         * @param array $data An associative array of data to pass to the view.
+         * @param int $statusCode The HTTP status code for the response. Defaults to 200.
+         * @return void
+         */
+        /**-------------------------------------------------------------------------*/
+        public function render(string $view, array $data = [], int $statusCode = 200): void
+        {
+            // Set the HTTP status code and Content-Type header
+            $this->setStatusCode($statusCode);
+            $this->addHeader('Content-Type', 'text/html; charset=UTF-8');
+            
+            // Render the specific view file and capture its output
+            $viewContent = $this->renderView($view, $data);
+
+            // Render the master layout file, passing the view content into it
+            $finalBody = $this->renderLayout($viewContent);
+
+            // Set the body and send the complete response
+            $this->setBody($finalBody);
+            $this->send();
+        }
+
+        /**-------------------------------------------------------------------------*/
+        /**
+         * Renders a specific view file from the views directory.
+         *
+         * This method uses output buffering to capture the HTML output of a view
+         * file, allowing it to be returned as a string.
+         *
+         * @param string $view The name of the view file (e.g., 'home').
+         * @param array $data An associative array of data to pass to the view.
+         * @return string The rendered HTML content of the view.
+         */
+        /**-------------------------------------------------------------------------*/
+        private function renderView(string $view, array $data): string
+        {
+            $viewPath = $this->viewsPath . DIRECTORY_SEPARATOR . $view . '.php';
+
+            if (!file_exists($viewPath)) {
+                // A more robust application would handle this with a 404 error page.
+                throw new \Exception("View file not found: " . $viewPath);
+            }
+
+            // Make the data variables accessible to the view file
+            extract($data);
+            
+            // Start output buffering to capture the view's content
+            ob_start();
+            include $viewPath;
+            return ob_get_clean();
+        }
+
+        /**-------------------------------------------------------------------------*/
+        /**
+         * Renders the master layout file, injecting the view content.
+         *
+         * This method assumes a main layout file exists (e.g., `views/layouts/main.php`)
+         * with a variable named `$content` to hold the view's HTML.
+         *
+         * @param string $content The rendered content of the view.
+         * @return string The final, complete HTML of the page.
+         */
+        /**-------------------------------------------------------------------------*/
+        private function renderLayout(string $content): string
+        {
+            $layoutPath = $this->viewsPath . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . 'main.php';
+
+            if (!file_exists($layoutPath)) {
+                throw new \Exception("Layout file not found: " . $layoutPath);
+            }
+
+            ob_start();
+            include $layoutPath;
+            return ob_get_clean();
+        }
     }
 ?>
