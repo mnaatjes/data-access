@@ -256,10 +256,18 @@
              * Form and execute response 
              */
             $res->setStatusCode(404, 'Not Found');
-            $res->addHeader('Content-Type', 'text/plain');
+            $res->addHeader('Content-Type', 'application/json');
+            
+            $errorMessage = '';
+            if ($e instanceof \Exception) {
+                $errorMessage = $e->getMessage();
+            } else {
+                $errorMessage = (string) $e;
+            }
+
             $res->setBody(json_encode([
-                "message"   => "404 Not Found: The requested resource could not be found",
-                "error"     => $e
+                "message" => "404 Not Found: The requested resource could not be found",
+                "error" => $errorMessage
             ]));
             $res->send();
         }
