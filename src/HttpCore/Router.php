@@ -62,7 +62,6 @@
         /**-------------------------------------------------------------------------*/
         public function get(string $path, string|array|callable $handler): self{
             $this->addRoute('GET', $path, $handler);
-            var_dump($this->routes);
             return $this;
         }
 
