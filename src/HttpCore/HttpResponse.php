@@ -4,9 +4,14 @@
 
     /**-------------------------------------------------------------------------*/
     /**
-     * @version 1.1.0
+     * 
      * @since 1.0.0:
      * - Added render() methods
+     * 
+     * @since 1.1.0:
+     * - Added redirect() method
+     * 
+     * @version 1.1.0
      */
     /**-------------------------------------------------------------------------*/
     class HttpResponse
@@ -274,6 +279,27 @@
             ob_start();
             include $layoutPath;
             return ob_get_clean();
+        }
+
+        /**-------------------------------------------------------------------------*/
+        /**
+         * Redirects the user to a new URL.
+         *
+         * This method sets the appropriate HTTP status code (302 Found by default)
+         * and a 'Location' header to instruct the browser to redirect. It then
+         * terminates script execution to prevent further output.
+         *
+         * @param string $url The URL to redirect to.
+         * @param int $statusCode The HTTP status code for the redirect.
+         * Defaults to 302 Found. Use 301 for a permanent redirect.
+         * @return void
+         */
+        /**-------------------------------------------------------------------------*/
+        public function redirect(string $url, int $statusCode = 302): void
+        {
+            $this->setStatusCode($statusCode);
+            $this->addHeader('Location', $url, true);
+            $this->send();
         }
     }
 ?>
