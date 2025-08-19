@@ -373,6 +373,43 @@
                 return NULL;
             }
         }
+        /**-------------------------------------------------------------------------*/
+        /**
+         * Finds model instances based on a set of conditions with a limit
+         *
+         * This is a generic method for querying the database. It is used by other
+         * convenience methods, such as `findByForeignId`, to retrieve one or more
+         * records that match the given criteria.
+         *
+         * @param array $conditions An associative array where keys are column names
+         * and values are the corresponding values to match.
+         * Example: `['id' => 1, 'status' => 'active']`
+         * @param int $limit Limit of records returned
+         * @return array|null An array of hydrated BaseModel instances on success,
+         * or null if no records are found.
+         */
+        /**-------------------------------------------------------------------------*/
+        public function findByLimit(array $conditions, int $limit=0): ?array{
+
+            // Perform Query
+            $results = $this->orm->find($this->tableName, $conditions, [], $limit);
+
+            // Validate Response
+            if(is_array($results) && !empty($results)){
+                // Loop and assign as Models
+                $records = [];
+                foreach($results as $data){
+                    $records[] = $this->hydrate($data);
+                }
+
+                // Return Data
+                return $records;
+
+            } else {
+                // Return NULL
+                return NULL;
+            }
+        }
 
         /**-------------------------------------------------------------------------*/
         /**

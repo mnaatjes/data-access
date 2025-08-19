@@ -2,9 +2,19 @@
     
     namespace mnaatjes\mvcFramework\HttpCore;
     
+    /**-------------------------------------------------------------------------*/
     /**
+     * Http Request Class
      * 
+     * @since 1.0.0:
+     * - Created
+     * 
+     * @since 1.0.1:
+     * - Added comments and fixed formatting
+     * 
+     * @version 1.0.1
      */
+    /**-------------------------------------------------------------------------*/
     class HttpRequest
     {
         private $method;
@@ -16,8 +26,12 @@
         private $body;
         private $files;       // Uploaded files
 
-        public function __construct()
-        {
+        /**-------------------------------------------------------------------------*/
+        /**
+         * 
+         */
+        /**-------------------------------------------------------------------------*/
+        public function __construct(){
             $this->method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
             $this->uri = $_SERVER['REQUEST_URI'] ?? '/';
             $this->pathInfo = $_SERVER['PATH_INFO'] ?? '';
@@ -28,26 +42,29 @@
             $this->files = $_FILES;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get the HTTP request method (e.g., 'GET', 'POST', 'PUT', 'DELETE').
          *
          * @return string
          */
-        public function getMethod(): string
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getMethod(): string{
             return $this->method;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get the full request URI (e.g., '/path/to/resource?param=value').
          *
          * @return string
          */
-        public function getUri(): string
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getUri(): string{
             return $this->uri;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get a specific request header by name (case-insensitive).
          *
@@ -55,8 +72,8 @@
          * @param mixed $default The default value to return if the header is not found.
          * @return string|null The header value, or the default if not found.
          */
-        public function getHeader(string $name, $default = null): ?string
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getHeader(string $name, $default = null): ?string{
             $name = strtolower($name);
             foreach ($this->headers as $headerName => $headerValue) {
                 if (strtolower($headerName) === $name) {
@@ -66,16 +83,18 @@
             return $default;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get all request headers.
          *
          * @return array An associative array of headers.
          */
-        public function getHeaders(): array
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getHeaders(): array{
             return $this->headers;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get a specific GET query parameter.
          *
@@ -83,21 +102,23 @@
          * @param mixed $default The default value to return if the parameter is not found.
          * @return mixed The query parameter value, or the default if not found.
          */
-        public function getQueryParam(string $name, $default = null)
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getQueryParam(string $name, $default = null){
             return $this->queryParams[$name] ?? $default;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get all GET query parameters.
          *
          * @return array An associative array of query parameters.
          */
-        public function getQueryParams(): array
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getQueryParams(): array{
             return $this->queryParams;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get a specific POST parameter.
          *
@@ -105,38 +126,41 @@
          * @param mixed $default The default value to return if the parameter is not found.
          * @return mixed The POST parameter value, or the default if not found.
          */
-        public function getPostParam(string $name, $default = null)
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getPostParam(string $name, $default = null){
             return $this->postParams[$name] ?? $default;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get all POST parameters.
          *
          * @return array An associative array of POST parameters.
          */
-        public function getPostParams(): array
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getPostParams(): array{
             return $this->postParams;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get the raw request body (useful for JSON, XML, etc.).
          *
          * @return string The raw request body content.
          */
-        public function getBody(): string
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getBody(): string{
             return $this->body;
         }
 
+        /**-------------------------------------------------------------------------*/
         /**
          * Get uploaded files.
          *
          * @return array The $_FILES superglobal array.
          */
-        public function getFiles(): array
-        {
+        /**-------------------------------------------------------------------------*/
+        public function getFiles(): array{
             return $this->files;
         }
         /**
