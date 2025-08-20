@@ -1,26 +1,28 @@
 <?php
-
-    require_once("bootstrap.php");
     /**
-     * Connect to DB
+     * Require Autoloader and Bootstrap
      */
 
-    use mnaatjes\App\DataAccess\Database;
-    use mnaatjes\App\DataAccess\ORM;
-    use mnaatjes\App\HttpCore\HttpRequest;
-    use mnaatjes\App\HttpCore\HttpResponse;
-    use mnaatjes\App\Utils\TestController;
-    use mnaatjes\App\Utils\TestRepository;
+    require_once(FRAMEWORK_PATH . "/vendor/autoload.php");
+    require_once(FRAMEWORK_PATH . "/bootstrap.php");
+
+    /**
+     * Load ENV Variables
+     */
+    use mnaatjes\mvcFramework\Utils\DotEnv;
+    DotEnv::load(FRAMEWORK_PATH . "/tests/.env");
+
+    use mnaatjes\mvcFramework\DataAccess\Database;
+    use mnaatjes\mvcFramework\DataAccess\ORM;
+    use mnaatjes\mvcFramework\HttpCore\HttpRequest;
+    use mnaatjes\mvcFramework\HttpCore\HttpResponse;
 
     $db         = Database::getInstance();
     $orm        = new ORM($db);
-    $repo       = new TestRepository($orm);
-    $controller = new TestController($repo); 
 
     $req = new HttpRequest();
     $res = new HttpResponse();
 
-    $controller->index($req, $res);
-
+    
 
 ?>
