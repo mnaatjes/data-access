@@ -13,6 +13,9 @@
      * @example tests/main.php
      */
     define("PROJECT_ROOT", dirname(__DIR__));
+    var_dump($_SERVER["DOCUMENT_ROOT"]);
+    var_dump(__DIR__);
+    return;
     /**
      * Require autoloader
      * Require bootstrap.php
@@ -20,30 +23,18 @@
     require_once(PROJECT_ROOT . "/vendor/autoload.php");
     $container = require_once(PROJECT_ROOT . "/bootstrap.php");
 
-    //var_dump($_ENV["DB_CONNECTION"]);
-
-    //require_once(ROOT_DIR . "/bootstrap.php");
-    return;
     /**
      * Connect to DB
      */
-    /*
-    use mnaatjes\App\DataAccess\Database;
-    use mnaatjes\App\DataAccess\ORM;
-    use mnaatjes\App\HttpCore\HttpRequest;
-    use mnaatjes\App\HttpCore\HttpResponse;
-    use mnaatjes\App\Utils\TestController;
-    use mnaatjes\App\Utils\TestRepository;
+    use mnaatjes\mvcFramework\DataAccess\Database;
+    use mnaatjes\mvcFramework\DataAccess\ORM;
+    use mnaatjes\mvcFramework\HttpCore\HttpRequest;
+    use mnaatjes\mvcFramework\HttpCore\HttpResponse;
 
     $db         = Database::getInstance();
     $orm        = new ORM($db);
-    $repo       = new TestRepository($orm);
-    $controller = new TestController($repo); 
 
     $req = new HttpRequest();
     $res = new HttpResponse();
-
-    $controller->index($req, $res);
-    */
 
 ?>
