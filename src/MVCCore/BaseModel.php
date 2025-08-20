@@ -40,9 +40,9 @@
      * - Added protected $id to enforce primary key assignment
      * 
      * @since 1.2.3:
-     * - 
+     * - Modified toArray() to make all snake_case property names lower case
      * 
-     * @version 1.2.3
+     * @version 1.2.4
      */
     /**-------------------------------------------------------------------------*/
     abstract class BaseModel {
@@ -210,6 +210,7 @@
 
                 // Format key to snake_case
                 $propName = preg_replace('/(?<=[a-z])(?=[A-Z])/', '_', $obj->getName());
+                $propName = strtolower($propName);
 
                 // Return entry
                 $acc[$propName] = $obj->getValue($this);
