@@ -18,6 +18,7 @@
     use mnaatjes\mvcFramework\HttpCore\HttpResponse;
     use mnaatjes\mvcFramework\SessionsCore\SessionManager;
     use mnaatjes\mvcFramework\HttpCore\Router;
+    use PharIo\Manifest\Author;
 
     $db         = Database::getInstance();
     $orm        = new ORM($db);
@@ -28,7 +29,7 @@
     $container->setShared(SessionManager::class, new SessionManager());
 
     $router = new Router($container);
-
+    /*
     $router->get("/", function($_, $res) use($container){
         $session = $container->get(SessionManager::class);
         //$session->start();
@@ -103,7 +104,30 @@
         echo "<pre>" . json_encode($data, JSON_PRETTY_PRINT) . "</pre>";
     });
 
+    */
+    /**
+     * Debugging Middleware
+     */
+    $authMiddle = function(HttpRequest $req, HttpResponse $res, callable $next) use($container){
+        $session = $container->get(SessionManager::class);
+        $session->set("username", "gemini");
+        var_dump("Middleware");
+        $next();
+    };
+
+    $router->get("/middle", function(HttpRequest $req, HttpResponse $res, array $params) use($container){
+        $session = $container->get(SessionManager::class);
+        var_dump("Handler");
+        var_dump($session->get("username"));
+        
+    }, [$authMiddle, function($req, $res, $next){
+        var_dump("Second Middleware");
+        $next();
+    }]);
     
+    /**
+     * Middleware testing
+     */
 
     $router->dispatch($req, $res);
 
