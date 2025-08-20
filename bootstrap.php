@@ -14,15 +14,13 @@
      */
     use mnaatjes\mvcFramework\Utils\Config;
     $config = new Config(PROJECT_ROOT . "/tests/.env");
-    
+
     /**
      * Instantiate DI Container and Return
      * @var Container $container
      */
-    /*
     use mnaatjes\mvcFramework\Container;
     $container = new Container();
     return $container;
-    */
     
 ?>
