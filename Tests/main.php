@@ -9,8 +9,9 @@
     /**
      * Load ENV Variables
      */
+
     use mnaatjes\mvcFramework\Utils\DotEnv;
-    DotEnv::load(FRAMEWORK_PATH . "/tests/.env");
+    DotEnv::load(FRAMEWORK_PATH . "/Tests/.env");
 
     use mnaatjes\mvcFramework\DataAccess\Database;
     use mnaatjes\mvcFramework\DataAccess\ORM;
@@ -18,7 +19,10 @@
     use mnaatjes\mvcFramework\HttpCore\HttpResponse;
     use mnaatjes\mvcFramework\SessionsCore\SessionManager;
     use mnaatjes\mvcFramework\HttpCore\Router;
-    use PharIo\Manifest\Author;
+    use mnaatjes\mvcFramework\Tests\SomeController;
+    use mnaatjes\mvcFramework\Tests\SomeRepository;
+    use mnaatjes\mvcFramework\Tests\SomeService;
+
 
     $db         = Database::getInstance();
     $orm        = new ORM($db);
@@ -27,8 +31,25 @@
     $res = new HttpResponse();
 
     $container->setShared(SessionManager::class, new SessionManager());
+    $container->setShared("orm", new ORM($db));
 
     $router = new Router($container);
+
+    $router->get("/", function($req, $res, $params) use($container){
+
+        $dependencies = [
+            "Controller" => new SomeController(
+                new SomeService(
+                    new SomeRepository($container->get("orm"))
+                )
+            )
+        ];
+
+        $dependencies["Controller"]->SomeService->store("pet", "gemini");
+        $dependencies["Controller"]->SomeService->read("pet");
+
+        printf('<pre>%s</pre>', json_encode($dependencies, JSON_PRETTY_PRINT));
+    });
     /*
     $router->get("/", function($_, $res) use($container){
         $session = $container->get(SessionManager::class);
@@ -108,6 +129,7 @@
     /**
      * Debugging Middleware
      */
+    /*
     $authMiddle = function(HttpRequest $req, HttpResponse $res, callable $next) use($container){
         $session = $container->get(SessionManager::class);
         $session->set("username", "gemini");
@@ -124,7 +146,7 @@
         var_dump("Second Middleware");
         $next();
     }]);
-    
+    */
     /**
      * Middleware testing
      */

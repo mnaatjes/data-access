@@ -24,33 +24,76 @@
      * - Added common HTTP action methods (`index`, `show`, `store`, etc.).
      * - Included helper methods for redirects and JSON responses.
      *
-     * @version 1.0.0
+     * @since 1.0.0:
+     * - Removed (decoupled) need for BaseRepository Class
+     * - Refactored __construct() method:
+     *      -> no longer requires BaseRepository
+     *      -> accepts optional services array (default []) and parses
+     *      -> TODO: Make repositories available thru services
+     *      -> uses registerServices() method if services are passed (services are optional)
+     * 
+     * - Added registerServices() method to store service (short-names) in an array
+     * - added _call() method to pull Service objects from $this->services array
+     * 
+     * @version 1.1.0
      */
     /**------------------------------------------------------------------------*/
     abstract class BaseController {
+
         /**
-         * The repository instance for accessing data.
-         *
-         * @var BaseRepository
+         * A container for registered service objects to prevent dynamic property deprecation.
+         * @var array Service for interfacing with repository
          */
-        protected BaseRepository $repository;
+        protected array $services;
+
+        /**-------------------------------------------------------------------------*/
+        /**
+         * Constructor
+         */
+        /**-------------------------------------------------------------------------*/
+        public function __construct(object ...$services){
+
+            // Register Services if they exist
+            if(!empty($services)){
+                $this->registerServices(...$services);
+            }
+        }
 
         /**------------------------------------------------------------------------*/
         /**
-         * Initializes the controller with a repository instance.
+         * Register Services
          *
-         * This constructor uses dependency injection to set the repository, making
-         * the controller testable and loosely coupled from its data source. It also
-         * captures the incoming request data for use in action methods.
+         * This method takes a list of objects and assigns them to the
+         * controller instance using their short class name as the property name.
+         * For example, a `SomeClassService` object will be available as
+         * `$this->SomeClassService`.
          *
-         * @param BaseRepository $repository The repository for this controller's resource.
-         * @param array $requestData An array containing all incoming request data.
+         * @param object ...$services The service objects to register.
          */
         /**------------------------------------------------------------------------*/
-        public function __construct(BaseRepository $repository){
+        private function registerServices(object ...$services){
+            foreach ($services as $service) {
+                // Get the class name of the service, e.g., 'SomeService'
+                $className = (new \ReflectionClass($service))->getShortName();
 
-            // Validate BaseRepository is set
-            $this->repository = $repository;
+                // Store the service in the dedicated services array.
+                $this->services[$className] = $service;
+            }
+        }
+
+        /**
+         * Magic method to allow accessing services as if they were properties.
+         *
+         * This method is automatically called when you try to access a property
+         * that is not explicitly declared. It retrieves the service from the
+         * internal `$services` array. This allows for clean syntax like
+         * `$this->SomeClassService`.
+         *
+         * @param string $name The name of the property (service) being accessed.
+         * @return object|null The service object or null if not found.
+         */
+        public function __get(string $name){
+            return $this->services[$name] ?? null;
         }
 
         /**------------------------------------------------------------------------*/

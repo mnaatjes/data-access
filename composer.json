@@ -14,7 +14,8 @@
     },
     "autoload": {
         "psr-4": {
-            "mnaatjes\\mvcFramework\\": "src/"
+            "mnaatjes\\mvcFramework\\": "src/",
+            "mnaatjes\\mvcFramework\\Tests\\": "Tests/"
         }
     },
     "minimum-stability": "dev",
